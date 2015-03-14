@@ -1,0 +1,164 @@
+<?php
+/**
+ * @file
+ * Lets users get preview and next nodes based on a particular nid.
+ *
+ * Besides, allows users to choice a content type.
+ *
+ */
+
+/**
+ * Gets the previous or next published Node NID of the given nid.
+ *
+ * @param $nid : Current Nid
+ * @param $op : < for previous and > for next
+ * @param null $type : Name of the content type to get next and prev of the same content type.
+ * @return nid, FALSE if next or prev nid is not found.
+ */
+function mate_prev_next_get($nid, $op, $type = NULL) {
+  $query = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('n.nid', $nid, $op)
+    ->condition('n.status', 1, '=')
+    ->range(0, 1);
+
+  if (is_string($type)) {
+    $query->condition('n.type', $type, '=');
+  }
+
+  if ($op == '<') {
+    $query->orderBy('n.nid', 'DESC');
+  }
+  else {
+    $query->orderBy('n.nid', 'ASC');
+  }
+
+  $result = $query->execute()->fetchAssoc();
+
+  if (empty($result)) {
+    return FALSE;
+  }
+  else {
+    return $result['nid'];
+  }
+}
+
+/**
+ * Gets the next nid of a given nid.
+ *
+ * @param $nid : Current Nid
+ * @param null $type : Name of the content type to get next and prev of the same content type.
+ *
+ * @return nid : of false if is not found
+ */
+function mate_prev_next_get_next($nid, $type = NULL) {
+  return mate_prev_next_get($nid, '>', $type);
+}
+
+/**
+ * Gets the prev nid of a given nid.
+ *
+ * @param $nid : Current Nid
+ * @param null $type : Name of the content type to get next and prev of the same content type.
+ *
+ * @return nid : of false if is not found
+ */
+function mate_prev_next_get_prev($nid, $type = NULL) {
+  return mate_prev_next_get($nid, '<', $type);
+}
+
+/**
+ * Implements hook_block_info
+ */
+function mate_prev_next_block_info() {
+
+  $blocks['mate_prev_next_links'] = array(
+    'info' => 'Previous and Next Node Links',
+    'cache' => DRUPAL_CACHE_PER_PAGE  ,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view
+ */
+function mate_prev_next_block_view($delta) {
+  $blocks = array();
+
+  switch ($delta) {
+    case 'mate_prev_next_links':
+      $blocks['subject'] = '';
+      $blocks['content'] = mate_prev_next_create_anchors();
+  }
+
+  return $blocks;
+}
+
+/**
+ * Theme : Returns the previous and next nodes block view.
+ *
+ * @return string
+ */
+function mate_prev_next_create_anchors() {
+  $prev_node_url = '';
+  $next_node_url = '';
+  $prev_node_title = '';
+  $next_node_title = '';
+  $result = '';
+
+  if (arg(0) == 'node' and is_numeric(arg(1))) {
+    $current_nid = arg(1);
+    if (!empty($current_nid)) {
+      $previous_nid = mate_prev_next_get_prev($current_nid);
+      if ($previous_nid) {
+        $previous_node = node_load($previous_nid);
+        $prev_node_url = url('node/' . $previous_nid);
+        $prev_node_title = $previous_node->title;
+      }
+      $next_nid = mate_prev_next_get_next($current_nid);
+      if ($next_nid) {
+        $next_node = node_load($next_nid);
+        $next_node_url = url('node/' . $next_nid);
+        $next_node_title = $next_node->title;
+      }
+
+      $result = theme(
+        'previous_next_node',
+        array(
+          'prev_node_url' => $prev_node_url,
+          'next_node_url' => $next_node_url,
+          'prev_node_title' => $prev_node_title,
+          'next_node_title' => $next_node_title,
+
+        )
+      );
+    }
+  }
+
+  return $result;
+}
+
+/**
+ * Implements hook_theme.
+ */
+function mate_prev_next_theme($existing, $type, $theme, $path) {
+
+  $base = array(
+    //'path' => 'templates',
+  );
+
+  $items['previous_next_node'] = $base + array(
+    'variables' => array(
+      'prev_node_url' => '#',
+      'next_node_url' => '#',
+      'prev_node_title' => '',
+      'next_node_title' => ''
+    ),
+    'template' => 'templates/prev_next',
+  );
+
+  return $items;
+}
+
+
