@@ -3,7 +3,7 @@
 This module provides two functions to help to get the previous and next node of a given node.
 This will help to provide navigation links for your site on each node.
 
-### Pragmatically
+### Programatically
 
 You have these two functions
 
@@ -16,7 +16,6 @@ and
 ```php
 mate_prev_next_get_prev($nid, $type);
 ```
-
 
 Where
 
@@ -31,3 +30,7 @@ will get nodes from any content type.
 This module provides a default block to get prev and next links without code, will get next and prev of
 any content type. You can customize this template adding your own css or overriding the template in
 your local theme.
+
+### More info
+
+Visit module page in Drupal.org https://www.drupal.org/sandbox/casivaagustin/2452411
