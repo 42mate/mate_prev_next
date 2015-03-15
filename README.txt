@@ -41,4 +41,3 @@ your local theme.
 Visit module page in Drupal.org 
 
 https://www.drupal.org/sandbox/casivaagustin/2452411
-
