@@ -150,7 +150,7 @@ function mate_prev_next_theme($existing, $type, $theme, $path) {
       'prev_node_url' => '#',
       'next_node_url' => '#',
       'prev_node_title' => '',
-      'next_node_title' => ''
+      'next_node_title' => '',
     ),
     'template' => 'templates/prev_next',
   );
