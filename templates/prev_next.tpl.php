@@ -1,7 +1,7 @@
 <?php
 /**
- * @file
- * Default template for previous and next notice blocks
+ * @file : Default template for previous and next notice blocks.
+ *
  * @ingroup views_templates
  */
 ?>

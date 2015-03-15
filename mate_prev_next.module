@@ -13,6 +13,7 @@
  * @param $nid : Current Nid
  * @param $op : < for previous and > for next
  * @param null $type : Name of the content type to get next and prev of the same content type.
+ *
  * @return nid, FALSE if next or prev nid is not found.
  */
 function mate_prev_next_get($nid, $op, $type = NULL) {
@@ -68,7 +69,7 @@ function mate_prev_next_get_prev($nid, $type = NULL) {
 }
 
 /**
- * Implements hook_block_info
+ * Implements hook_block_info().
  */
 function mate_prev_next_block_info() {
 
@@ -81,7 +82,7 @@ function mate_prev_next_block_info() {
 }
 
 /**
- * Implements hook_block_view
+ * Implements hook_block_view().
  */
 function mate_prev_next_block_view($delta) {
   $blocks = array();
@@ -140,13 +141,9 @@ function mate_prev_next_create_anchors() {
 }
 
 /**
- * Implements hook_theme.
+ * Implements hook_theme().
  */
 function mate_prev_next_theme($existing, $type, $theme, $path) {
-
-  $base = array(
-    //'path' => 'templates',
-  );
 
   $items['previous_next_node'] = $base + array(
     'variables' => array(
@@ -160,5 +157,4 @@ function mate_prev_next_theme($existing, $type, $theme, $path) {
 
   return $items;
 }
-
 
