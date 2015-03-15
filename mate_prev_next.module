@@ -6,10 +6,10 @@
 /**
  * Gets the previous or next published Node NID of the given nid.
  *
- * @param integer $nid
- *   Current Nid
+ * @param int $nid
+ *   Current Nid.
  * @param string $op
- *    < for previous and > for next
+ *   Possible values < for previous and > for next.
  * @param string $type
  *    Name of the content type to get next and prev of the same content type.
  *
@@ -47,8 +47,10 @@ function mate_prev_next_get($nid, $op, $type = NULL) {
 /**
  * Gets the next nid of a given nid.
  *
- * @param $nid : Current Nid
- * @param $type : Name of the content type to get next and prev of the same content type.
+ * @param int $nid
+ *   Current Nid.
+ * @param string $type
+ *    Name of the content type to get next and prev of the same content type.
  *
  * @return nid
  *   or false if is not found.
@@ -60,8 +62,10 @@ function mate_prev_next_get_next($nid, $type = NULL) {
 /**
  * Gets the prev nid of a given nid.
  *
- * @param $nid : Current Nid.
- * @param $type : Name of the content type to get next and prev of the same content type.
+ * @param int $nid
+ *    Current Nid.
+ * @param string $type 
+ *    Name of the content type to get next and prev of the same content type.
  *
  * @return nid 
  *   or false if is not found.
