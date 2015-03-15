@@ -145,7 +145,7 @@ function mate_prev_next_create_anchors() {
  */
 function mate_prev_next_theme($existing, $type, $theme, $path) {
 
-  $items['previous_next_node'] = $base + array(
+  $items['previous_next_node'] = array(
     'variables' => array(
       'prev_node_url' => '#',
       'next_node_url' => '#',
