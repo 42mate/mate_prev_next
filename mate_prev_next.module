@@ -1,10 +1,6 @@
 <?php
 /**
- * @file
  * Lets users get preview and next nodes based on a particular nid.
- *
- * Besides, allows users to choice a content type.
- *
  */
 
 /**
@@ -12,9 +8,9 @@
  *
  * @param $nid : Current Nid
  * @param $op : < for previous and > for next
- * @param null $type : Name of the content type to get next and prev of the same content type.
+ * @param  $type : Name of the content type to get next and prev of the same content type.
  *
- * @return nid, FALSE if next or prev nid is not found.
+ * @return nid : FALSE if next or prev nid is not found.
  */
 function mate_prev_next_get($nid, $op, $type = NULL) {
   $query = db_select('node', 'n')
@@ -48,9 +44,9 @@ function mate_prev_next_get($nid, $op, $type = NULL) {
  * Gets the next nid of a given nid.
  *
  * @param $nid : Current Nid
- * @param null $type : Name of the content type to get next and prev of the same content type.
+ * @param $type : Name of the content type to get next and prev of the same content type.
  *
- * @return nid : of false if is not found
+ * @return nid : of false if is not found.
  */
 function mate_prev_next_get_next($nid, $type = NULL) {
   return mate_prev_next_get($nid, '>', $type);
@@ -59,10 +55,10 @@ function mate_prev_next_get_next($nid, $type = NULL) {
 /**
  * Gets the prev nid of a given nid.
  *
- * @param $nid : Current Nid
- * @param null $type : Name of the content type to get next and prev of the same content type.
+ * @param $nid : Current Nid.
+ * @param $type : Name of the content type to get next and prev of the same content type.
  *
- * @return nid : of false if is not found
+ * @return nid : of false if is not found.
  */
 function mate_prev_next_get_prev($nid, $type = NULL) {
   return mate_prev_next_get($nid, '<', $type);

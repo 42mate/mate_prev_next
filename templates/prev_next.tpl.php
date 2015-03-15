@@ -1,8 +1,9 @@
 <?php
 /**
- * Default template for previous and next links
+ * Default template for previous and next links.
  *
  * @file : Default template for previous and next notice blocks.
+ *
  * @ingroup views_templates
  */
 ?>
