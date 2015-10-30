@@ -34,7 +34,9 @@ function mate_prev_next_get($nid, $op, $type = NULL) {
     $query->orderBy('n.nid', 'ASC');
   }
 
-  $result = $query->execute()->fetchAssoc();
+  $result = $query
+    ->execute()
+    ->fetchAssoc();
 
   if (empty($result)) {
     return FALSE;
