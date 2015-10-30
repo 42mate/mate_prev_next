@@ -121,12 +121,15 @@ function mate_prev_next_create_anchors() {
     $current_nid = arg(1);
     if (!empty($current_nid)) {
       $previous_nid = mate_prev_next_get_prev($current_nid);
+
       if ($previous_nid) {
         $previous_node = node_load($previous_nid);
         $prev_node_url = url('node/' . $previous_nid);
         $prev_node_title = $previous_node->title;
       }
+
       $next_nid = mate_prev_next_get_next($current_nid);
+
       if ($next_nid) {
         $next_node = node_load($next_nid);
         $next_node_url = url('node/' . $next_nid);
@@ -140,7 +143,6 @@ function mate_prev_next_create_anchors() {
           'next_node_url' => $next_node_url,
           'prev_node_title' => $prev_node_title,
           'next_node_title' => $next_node_title,
-
         )
       );
     }
@@ -153,7 +155,6 @@ function mate_prev_next_create_anchors() {
  * Implements hook_theme().
  */
 function mate_prev_next_theme($existing, $type, $theme, $path) {
-
   $items['previous_next_node'] = array(
     'variables' => array(
       'prev_node_url' => '#',
@@ -163,6 +164,5 @@ function mate_prev_next_theme($existing, $type, $theme, $path) {
     ),
     'template' => 'templates/prev_next',
   );
-
   return $items;
 }
