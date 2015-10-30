@@ -80,7 +80,6 @@ function mate_prev_next_get_prev($nid, $type = NULL) {
  * Implements hook_block_info().
  */
 function mate_prev_next_block_info() {
-
   $blocks['mate_prev_next_links'] = array(
     'info' => 'Previous and Next Node Links',
     'cache' => DRUPAL_CACHE_PER_PAGE  ,
@@ -117,7 +116,7 @@ function mate_prev_next_create_anchors() {
   $next_node_title = '';
   $result = '';
 
-  if (arg(0) == 'node' and is_numeric(arg(1))) {
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
     $current_nid = arg(1);
     if (!empty($current_nid)) {
       $previous_nid = mate_prev_next_get_prev($current_nid);
